@@ -111,7 +111,7 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
 }
 #loader.done { transform: translateY(-100%); }
 /* Breathing loader: SHIFT expands to 3 echo layers and back to 1, looping */
-.shift-logo--xl { font-size: clamp(54px, 13vw, 132px); letter-spacing: 0.05em; --sl-step: 0.18em; }
+.shift-logo--xl { font-size: clamp(54px, 13vw, 132px); letter-spacing: 0.05em; --sl-step: 0.13em; }
 #loader .shift-logo { color: #fff; }
 .shift-logo--breathe .sl-1 { animation: slBreathe1 2.6s var(--ease) infinite; }
 .shift-logo--breathe .sl-2 { animation: slBreathe2 2.6s var(--ease) infinite; }
@@ -145,8 +145,8 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
 .brand { display: inline-flex; align-items: flex-end; gap: 16px; }
 .shift-logo {
   position: relative; display: inline-block; font-family: var(--font-display);
-  font-weight: 500; line-height: 0.86; letter-spacing: 0.06em; color: var(--ink);
-  font-size: 26px; --sl-step: 0.22em;
+  font-weight: 400; line-height: 0.86; letter-spacing: 0.06em; color: var(--ink);
+  font-size: 26px; --sl-step: 0.13em;
 }
 .shift-logo .sl-sizer { display: block; visibility: hidden; }
 .shift-logo .sl-layer { position: absolute; top: 0; left: 0; white-space: nowrap; transition: transform 0.6s var(--ease); }
