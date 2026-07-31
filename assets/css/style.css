@@ -110,17 +110,21 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
   display: grid; place-items: center; transition: transform 0.8s var(--ease); will-change: transform;
 }
 #loader.done { transform: translateY(-100%); }
-.loader-mark { display: flex; overflow: hidden; }
-.loader-mark span {
-  font-family: var(--font-display); font-weight: 800; font-size: clamp(52px, 12vw, 128px);
-  letter-spacing: -0.04em; transform: translateY(110%); animation: letterUp 0.7s var(--ease) forwards;
+/* Breathing loader: SHIFT expands to 3 echo layers and back to 1, looping */
+.shift-logo--xl { font-size: clamp(54px, 13vw, 132px); letter-spacing: 0.05em; --sl-step: 0.18em; }
+#loader .shift-logo { color: #fff; }
+.shift-logo--breathe .sl-1 { animation: slBreathe1 2.6s var(--ease) infinite; }
+.shift-logo--breathe .sl-2 { animation: slBreathe2 2.6s var(--ease) infinite; }
+@keyframes slBreathe1 {
+  0%, 14% { transform: translateX(calc(var(--sl-step) * 2)); }
+  46%, 60% { transform: translateX(0); }
+  92%, 100% { transform: translateX(calc(var(--sl-step) * 2)); }
 }
-.loader-mark span:nth-child(1) { animation-delay: 0.05s; }
-.loader-mark span:nth-child(2) { animation-delay: 0.12s; }
-.loader-mark span:nth-child(3) { animation-delay: 0.19s; }
-.loader-mark span:nth-child(4) { animation-delay: 0.26s; color: var(--accent); }
-.loader-mark span:nth-child(5) { animation-delay: 0.33s; }
-@keyframes letterUp { to { transform: translateY(0); } }
+@keyframes slBreathe2 {
+  0%, 14% { transform: translateX(var(--sl-step)); }
+  46%, 60% { transform: translateX(0); }
+  92%, 100% { transform: translateX(var(--sl-step)); }
+}
 .loader-bar { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent); width: 0; animation: barGrow 0.9s var(--ease) forwards; }
 @keyframes barGrow { to { width: 100%; } }
 
@@ -137,14 +141,26 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
 .site-head.hide { transform: translateY(-100%); }
 .site-head .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 
-/* animated SHIFT wordmark (top-left, plays on the "shift" name) */
-.brand { display: inline-flex; align-items: baseline; gap: 2px; font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -0.03em; }
-.brand .b-shift { display: inline-flex; }
-.brand .b-shift span { display: inline-block; transition: transform 0.4s var(--ease); }
-.brand:hover .b-shift span { transform: translateY(-3px); }
-.brand:hover .b-shift span:nth-child(odd) { transform: translateY(3px); }
-.brand .b-dot { color: var(--accent); }
-.brand small { font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-left: 8px; font-family: var(--font-body); align-self: center; }
+/* SHIFT echo logo — 3 offset layers, all one black; converges to a single solid SHIFT on hover */
+.brand { display: inline-flex; align-items: flex-end; gap: 16px; }
+.shift-logo {
+  position: relative; display: inline-block; font-family: var(--font-display);
+  font-weight: 800; line-height: 0.86; letter-spacing: 0.06em; color: var(--ink);
+  font-size: 26px; --sl-step: 0.2em;
+}
+.shift-logo .sl-sizer { display: block; visibility: hidden; }
+.shift-logo .sl-layer { position: absolute; top: 0; left: 0; white-space: nowrap; transition: transform 0.6s var(--ease); }
+.shift-logo .sl-1 { transform: translateX(calc(var(--sl-step) * 2)); }
+.shift-logo .sl-2 { transform: translateX(var(--sl-step)); }
+.shift-logo .sl-3 { transform: translateX(0); }
+.brand:hover .shift-logo .sl-1,
+.shift-logo.is-solid .sl-1 { transform: translateX(0); }
+.brand:hover .shift-logo .sl-2,
+.shift-logo.is-solid .sl-2 { transform: translateX(0); }
+.shift-logo--hoverable { cursor: pointer; }
+.shift-logo--hoverable:hover .sl-1,
+.shift-logo--hoverable:hover .sl-2 { transform: translateX(0); }
+.brand-sub { font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: lowercase; color: var(--ink); margin-bottom: 4px; }
 
 .nav { display: flex; align-items: center; gap: 34px; }
 .nav a { font-size: 15px; font-weight: 500; position: relative; padding: 4px 0; }

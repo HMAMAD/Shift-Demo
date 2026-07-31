@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SHIFT — Logo &amp; Motion</title>
+<meta name="description" content="The new all-black SHIFT echo logo and its motion behaviour — 3-layer echo, hover-to-converge, and the breathing loader." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text x='50' y='72' font-family='Arial' font-size='64' font-weight='bold' fill='white' text-anchor='middle'>S</text></svg>" />
+<style>
+  .lg-wrap { max-width: 1000px; margin: 0 auto; padding: clamp(40px,7vw,90px) var(--gut); }
+  .lg-block { padding: clamp(40px,6vw,72px); border: 1px solid var(--line); margin-bottom: 28px; }
+  .lg-block.dark { background: var(--ink); border-color: var(--ink); }
+  .lg-tag { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .lg-block.dark .lg-tag { color: rgba(255,255,255,0.55); }
+  .lg-hint { font-size: 14px; color: var(--muted); margin-top: 22px; }
+  .lg-block.dark .lg-hint { color: rgba(255,255,255,0.55); }
+  .lg-stage { display: flex; align-items: center; justify-content: center; min-height: 220px; }
+  .lg-lockup { display: inline-flex; align-items: flex-end; gap: 22px; }
+  .lg-lockup .brand-sub { font-size: 20px; }
+  .lg-nav { display:flex; gap:20px; margin-bottom:40px; font-size:14px; }
+  .lg-nav a { color: var(--muted); } .lg-nav a:hover { color: var(--ink); }
+  .lg-cols { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  @media (max-width:720px){ .lg-cols{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="lg-wrap">
+
+  <div class="lg-nav"><a href="index.html">← Back to site</a></div>
+
+  <div class="eyebrow" style="margin-bottom:18px;">New brand mark</div>
+  <h1 class="display" style="font-size:clamp(40px,7vw,84px); margin-bottom:14px;">The SHIFT logo.</h1>
+  <p class="lead maxw-60" style="margin-bottom:50px;">All one black. Three offset layers create the echo that plays on the word <em>shift</em> — and it resolves into a single clean wordmark in motion.</p>
+
+  <!-- Default 3-layer + hover converge -->
+  <div class="lg-block">
+    <div class="lg-tag">Default state — hover to converge</div>
+    <div class="lg-stage">
+      <span class="shift-logo shift-logo--xl shift-logo--hoverable" role="img" aria-label="SHIFT">
+        <span class="sl-sizer" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-1" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-2" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-3">SHIFT</span>
+      </span>
+    </div>
+    <p class="lg-hint">Three black layers by default. On hover they slide together and focus into one solid <strong>SHIFT</strong> — the same behaviour used on the logo in the site header.</p>
+  </div>
+
+  <!-- Breathing loader -->
+  <div class="lg-block dark">
+    <div class="lg-tag">Loading screen — breathing 3 ↔ 1</div>
+    <div class="lg-stage">
+      <span class="shift-logo shift-logo--xl shift-logo--breathe" role="img" aria-label="SHIFT" style="color:#fff;">
+        <span class="sl-sizer" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-1" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-2" aria-hidden="true">SHIFT</span>
+        <span class="sl-layer sl-3">SHIFT</span>
+      </span>
+    </div>
+    <p class="lg-hint">On loaders the mark breathes — expanding to three echo layers and settling back to one, on a loop.</p>
+  </div>
+
+  <div class="lg-cols">
+    <!-- Header lockup -->
+    <div class="lg-block">
+      <div class="lg-tag">Home-page lockup</div>
+      <div class="lg-stage" style="min-height:120px;">
+        <span class="lg-lockup">
+          <span class="shift-logo shift-logo--hoverable" style="font-size:44px;" role="img" aria-label="SHIFT">
+            <span class="sl-sizer" aria-hidden="true">SHIFT</span>
+            <span class="sl-layer sl-1" aria-hidden="true">SHIFT</span>
+            <span class="sl-layer sl-2" aria-hidden="true">SHIFT</span>
+            <span class="sl-layer sl-3">SHIFT</span>
+          </span>
+          <span class="brand-sub">interiors</span>
+        </span>
+      </div>
+      <p class="lg-hint">"interiors" sits beside the mark in <strong>black</strong>, not grey.</p>
+    </div>
+
+    <!-- SVG asset -->
+    <div class="lg-block">
+      <div class="lg-tag">Exportable asset (SVG)</div>
+      <div class="lg-stage" style="min-height:120px;">
+        <img src="assets/img/brand/shift-logo.svg" alt="SHIFT logo" style="width:100%; max-width:340px;" />
+      </div>
+      <p class="lg-hint"><a class="tlink" href="assets/img/brand/shift-logo.svg" download>Download SVG (black)</a> · <a class="tlink" href="assets/img/brand/shift-logo-white.svg" download>white version</a></p>
+    </div>
+  </div>
+
+  <p class="muted" style="font-size:13px; margin-top:30px;">Concept mark by High Moral Agency. Offset amount, layer count and speed are all easily tuned — say the word.</p>
+
+</div>
+</body>
+</html>
