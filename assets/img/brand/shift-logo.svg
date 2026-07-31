@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 300" role="img" aria-label="SHIFT">
   <title>SHIFT — echo logo (black)</title>
-  <g font-family="Archivo, Arial, sans-serif" font-weight="400" font-size="240" letter-spacing="6" fill="#0A0A0A">
-    <text x="82" y="222">SHIFT</text>
-    <text x="51" y="222">SHIFT</text>
+  <g font-family="Archivo, Arial, sans-serif" font-weight="250" font-size="240" letter-spacing="6" fill="#0A0A0A">
+    <text x="68" y="222">SHIFT</text>
+    <text x="44" y="222">SHIFT</text>
     <text x="20" y="222">SHIFT</text>
   </g>
 </svg>

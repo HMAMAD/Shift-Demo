@@ -98,16 +98,47 @@
       });
     }
 
-    /* ---------- Awards: drag / wheel horizontal scroll ---------- */
-    var rail = document.querySelector(".awards-rail");
-    if (rail) {
-      var down = false, startX, scrollLeft;
-      rail.addEventListener("mousedown", function (e) { down = true; rail.classList.add("drag"); startX = e.pageX - rail.offsetLeft; scrollLeft = rail.scrollLeft; });
-      window.addEventListener("mouseup", function () { down = false; rail.classList.remove("drag"); });
-      rail.addEventListener("mouseleave", function () { down = false; rail.classList.remove("drag"); });
-      rail.addEventListener("mousemove", function (e) { if (!down) return; e.preventDefault(); var x = e.pageX - rail.offsetLeft; rail.scrollLeft = scrollLeft - (x - startX) * 1.4; });
-      rail.addEventListener("wheel", function (e) { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { rail.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
+    /* ---------- Awards: automated carousel ---------- */
+    function initCarousel(root) {
+      var track = root.querySelector(".carousel__track");
+      var cards = Array.prototype.slice.call(track.children);
+      var dotsWrap = root.querySelector(".carousel__dots");
+      var delay = parseInt(root.getAttribute("data-autoplay"), 10) || 5000;
+      var index = 0, maxIndex = 0, timer = null;
+
+      function perView() { return parseInt(getComputedStyle(track).getPropertyValue("--per"), 10) || 1; }
+      function update() {
+        var x = cards[index] ? cards[index].offsetLeft : 0;
+        track.style.transform = "translateX(" + (-x) + "px)";
+        var dots = dotsWrap.children;
+        for (var i = 0; i < dots.length; i++) dots[i].classList.toggle("active", i === index);
+      }
+      function go(i) { index = i > maxIndex ? 0 : (i < 0 ? maxIndex : i); update(); }
+      function next() { go(index + 1 > maxIndex ? 0 : index + 1); }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function start() { if (!reduce && maxIndex > 0) { stop(); timer = setInterval(next, delay); } }
+      function build() {
+        maxIndex = Math.max(0, cards.length - perView());
+        if (index > maxIndex) index = maxIndex;
+        dotsWrap.innerHTML = "";
+        for (var i = 0; i <= maxIndex; i++) {
+          var b = document.createElement("button");
+          b.setAttribute("role", "tab");
+          b.setAttribute("aria-label", "Go to slide " + (i + 1));
+          (function (n) { b.addEventListener("click", function () { go(n); start(); }); })(i);
+          dotsWrap.appendChild(b);
+        }
+        update();
+      }
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("mouseleave", start);
+      root.addEventListener("focusin", stop);
+      root.addEventListener("focusout", start);
+      var rt;
+      window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(build, 180); });
+      build(); start();
     }
+    document.querySelectorAll(".carousel[data-autoplay]").forEach(initCarousel);
 
     /* ---------- Contact form (demo only, no submit) ---------- */
     var form = document.getElementById("contact-form");

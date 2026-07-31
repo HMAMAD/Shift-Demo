@@ -111,7 +111,7 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
 }
 #loader.done { transform: translateY(-100%); }
 /* Breathing loader: SHIFT expands to 3 echo layers and back to 1, looping */
-.shift-logo--xl { font-size: clamp(54px, 13vw, 132px); letter-spacing: 0.05em; --sl-step: 0.13em; }
+.shift-logo--xl { font-size: clamp(54px, 13vw, 132px); letter-spacing: 0.05em; --sl-step: 0.1em; }
 #loader .shift-logo { color: #fff; }
 .shift-logo--breathe .sl-1 { animation: slBreathe1 2.6s var(--ease) infinite; }
 .shift-logo--breathe .sl-2 { animation: slBreathe2 2.6s var(--ease) infinite; }
@@ -145,8 +145,8 @@ hr { border: none; border-top: 1px solid var(--line); margin: 0; }
 .brand { display: inline-flex; align-items: flex-end; gap: 16px; }
 .shift-logo {
   position: relative; display: inline-block; font-family: var(--font-display);
-  font-weight: 400; line-height: 0.86; letter-spacing: 0.06em; color: var(--ink);
-  font-size: 26px; --sl-step: 0.13em;
+  font-weight: 250; line-height: 0.86; letter-spacing: 0.06em; color: var(--ink);
+  font-size: 26px; --sl-step: 0.1em;
 }
 .shift-logo .sl-sizer { display: block; visibility: hidden; }
 .shift-logo .sl-layer { position: absolute; top: 0; left: 0; white-space: nowrap; transition: transform 0.6s var(--ease); }
@@ -271,29 +271,34 @@ body.menu-open .drawer a:nth-child(6){animation-delay:.45s}
 /* =====================================================================
    Brands marquee (Family of Brands)
    ===================================================================== */
-.marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 34px 0; }
-.marquee__track { display: flex; gap: 70px; width: max-content; animation: scrollx 40s linear infinite; align-items: center; }
+.marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 64px 0; }
+.marquee + .marquee { border-top: none; }
+.marquee__track { display: flex; gap: 110px; width: max-content; animation: scrollx 45s linear infinite; align-items: center; }
+.marquee--rev .marquee__track { animation-direction: reverse; animation-duration: 52s; }
 .marquee:hover .marquee__track { animation-play-state: paused; }
-.marquee img { height: 30px; width: auto; object-fit: contain; filter: grayscale(1) contrast(0.4) brightness(0.4); opacity: 0.7; transition: filter 0.3s, opacity 0.3s; }
+.marquee img { height: 58px; width: auto; object-fit: contain; filter: grayscale(1) contrast(0.4) brightness(0.4); opacity: 0.75; transition: filter 0.3s, opacity 0.3s; }
 .marquee img:hover { filter: none; opacity: 1; }
 @keyframes scrollx { to { transform: translateX(-50%); } }
 .brand-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.brand-grid .cell { background: var(--paper); aspect-ratio: 16/9; display: grid; place-items: center; padding: 24px; }
-.brand-grid img { height: 34px; width: auto; filter: grayscale(1); opacity: 0.65; transition: opacity 0.3s, filter 0.3s; }
+.brand-grid .cell { background: var(--paper); aspect-ratio: 3/2; display: grid; place-items: center; padding: 34px; }
+.brand-grid img { height: 50px; width: auto; filter: grayscale(1); opacity: 0.7; transition: opacity 0.3s, filter 0.3s; }
 .brand-grid .cell:hover img { filter: none; opacity: 1; }
-.brand-name { background: var(--paper); display: grid; place-items: center; font-weight: 600; color: var(--muted); font-size: 14px; letter-spacing: 0.04em; }
+.brand-name { background: var(--paper); display: grid; place-items: center; font-weight: 600; color: var(--muted); font-size: 17px; letter-spacing: 0.04em; }
 
 /* =====================================================================
    Awards — horizontal scroll showcase (scope: custom code)
    ===================================================================== */
-.awards-rail { display: flex; gap: 24px; overflow-x: auto; padding: 8px var(--gut) 30px; scroll-snap-type: x mandatory; cursor: grab; scrollbar-width: none; }
-.awards-rail::-webkit-scrollbar { display: none; }
-.awards-rail.drag { cursor: grabbing; }
-.award-card { scroll-snap-align: start; flex: 0 0 clamp(260px, 32vw, 380px); border: 1px solid rgba(255,255,255,0.18); padding: 34px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.3s, background 0.3s; }
-.award-card:hover { border-color: var(--accent); }
+.carousel { position: relative; }
+.carousel__viewport { overflow: hidden; }
+.carousel__track { --per: 3; --cgap: 24px; display: flex; gap: var(--cgap); transition: transform 0.7s var(--ease); will-change: transform; }
+.award-card { flex: 0 0 calc((100% - (var(--per) - 1) * var(--cgap)) / var(--per)); border: 1px solid rgba(255,255,255,0.18); padding: 38px 34px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; transition: border-color 0.3s, background 0.3s; }
+.award-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.03); }
 .award-card .yr { font-family: var(--font-display); font-weight: 800; font-size: 54px; color: var(--accent); letter-spacing: -0.03em; }
 .award-card h4 { font-size: 22px; margin: 16px 0 10px; }
 .award-card p { color: rgba(255,255,255,0.6); font-size: 15px; }
+.carousel__dots { display: flex; gap: 10px; justify-content: center; margin-top: 40px; }
+.carousel__dots button { width: 9px; height: 9px; padding: 0; border: none; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.35s var(--ease), width 0.35s var(--ease); }
+.carousel__dots button.active { background: var(--accent); width: 28px; border-radius: 5px; }
 
 /* =====================================================================
    Gallery + filter (scope: plugin-powered tag filtering)
@@ -353,6 +358,9 @@ body.menu-open .drawer a:nth-child(6){animation-delay:.45s}
 .tm .role { color: var(--muted); font-size: 13px; }
 .tm__media.placeholder { display: grid; place-items: center; }
 .tm__media.placeholder span { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--line-strong); }
+.tm__media--empty { display: grid; place-items: center; background: var(--paper-2); }
+.tm__media--empty svg { width: 44px; height: 44px; color: var(--line-strong); }
+.tm h4 .ph { color: var(--muted); font-weight: 500; }
 
 /* process steps */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -449,11 +457,14 @@ body.menu-open .drawer a:nth-child(6){animation-delay:.45s}
    ===================================================================== */
 @media (max-width: 1080px) {
   .gallery { columns: 2; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .brand-grid { grid-template-columns: repeat(3, 1fr); }
+  .carousel__track { --per: 2; }
 }
 @media (max-width: 860px) {
+  .carousel__track { --per: 1; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
   .nav { display: none; }
   .nav-cta .btn { display: none; }
   .burger { display: block; }
